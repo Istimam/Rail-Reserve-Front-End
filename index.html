@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Rail Reserve</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- swiffy-animation  -->
     <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous" defer></script>
+    <!-- flatpickr  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <link rel="stylesheet" href="index-style.css">
     <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
@@ -24,8 +30,8 @@
             <div class="flex-1 flex items-center justify-end">
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
-                        <a href="#" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</a>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
+                        <a href="./index.html" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</a>
+                        <a href="./login.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
                         <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Register</a>
                         <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Train Information</a>
                         <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact Us</a>
@@ -73,21 +79,42 @@
         <div class="grid gap-4 grid-cols-2">
           <div>
             <h4>From</h4>
-            <div>
-              <input type="text" class="w-full p-1 border-2 border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-50" placeholder="From Station">
+            <div class="autocomplete-wrapper">
+              <input type="text" id="input-box-from" class="w-full p-1 border-2 border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-50" placeholder="From Station">
+              <div class="result-box-from result-box">
+                <ul class="bt-[1px] pl-2 bg-zinc-200 shadow-md"></ul>
+              </div>
             </div>
-          </div>
+          </div>        
           <div>
             <h4>To</h4>
-            <input type="text" class="w-full p-1 border-2 border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-50" placeholder="To Station">
+            <div class="autocomplete-wrapper">
+              <input type="text" id="input-box-to" class="w-full p-1 border-2 border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-50" placeholder="To Station">
+              <div class="result-box-to result-box">
+                <ul class="bt-[1px] pl-2 bg-zinc-200 shadow-md"></ul>
+              </div>
+            </div>
           </div>
-          <div>
+          <div class="relative">
             <h4>Date of Journey</h4>
-            <input type="date" class="w-full p-1 border-2 border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-50" placeholder="Pick a date">
+            <input type="text" id="datePicker" class="w-full p-1 border-2 border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-50 pr-10" placeholder="Pick a Date">
+            <div class="absolute inset-y-0 right-0 flex items-center pr-2 mt-5">
+              <img src="./images/calendar.png" alt="Calendar Icon" class="calendar-icon">
+            </div>
           </div>
-          <div>
+          <div class="relative inline-block w-full">
             <h4>Choose Class</h4>
-            <input type="text" class="w-full p-1 border-2 border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-50" placeholder="Choose a class">
+            <input type="text" id="class-input" class="w-full p-1 border-2 border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-50 pr-8" placeholder="Choose a class">
+            <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+              <svg id="dropdown-icon" class="w-5 h-5 text-gray-500 transition-transform duration-300 mt-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+            <ul id="dropdown-list" class="absolute z-10 left-0 w-full bg-white border border-gray-300 rounded mt-1 hidden">
+              <li class="p-2 cursor-pointer hover:bg-blue-50">First Class</li>
+              <li class="p-2 cursor-pointer hover:bg-blue-50">Business Class</li>
+              <li class="p-2 cursor-pointer hover:bg-blue-50">Economy Class</li>
+            </ul>
           </div>
         </div>
         <div class="mt-7">
@@ -192,5 +219,6 @@
   </footer>
 
       <script src="./app.js"></script>
+      <script src="./autocomplete.js"></script>
 </body>
 </html>

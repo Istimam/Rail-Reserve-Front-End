@@ -4,15 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- login form  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="navstyle.css">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <!-- captcha link  -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <title>Modern Login Page | AsmrProg</title>
+    <title>Login Page | AsmrProg</title>
 </head>
 
 <body>
+<!-- navbar  -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-content">
+            <!-- Logo and Website Name -->
+            <div class="logo-container">
+                <img class="logo" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+                <span class="website-name">Your Website Name</span>
+            </div>
 
-    <div class="container" id="container">
+            <!-- Navbar Links -->
+            <div class="nav-links">
+                <a href="./index.html" class="nav-link active">Home</a>
+                <a href="#" class="nav-link">Login</a>
+                <a href="#" class="nav-link">Register</a>
+                <a href="#" class="nav-link">Train Information</a>
+                <a href="#" class="nav-link">Contact Us</a>
+            </div>
+
+            <!-- Profile dropdown and notification icon -->
+            <div class="profile-container">
+                <button type="button" class="notification-button">
+                    <span class="sr-only">View notifications</span>
+                    <svg class="notification-icon" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                    </svg>
+                </button>
+
+                <div class="user-menu">
+                    <button type="button" class="user-menu-button" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                        <span class="sr-only">Open user menu</span>
+                        <img class="user-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-links">
+            <a href="#" class="mobile-link active">Home</a>
+            <a href="#" class="mobile-link">Login</a>
+            <a href="#" class="mobile-link">Register</a>
+            <a href="#" class="mobile-link">Train Information</a>
+            <a href="#" class="mobile-link">Contact Us</a>
+        </div>
+    </div>
+</nav>
+
+    <!-- login sign-up form  -->
+    <div class="container custom-style" id="container">
         <div class="form-container sign-up">
             <form id="uploadForm">
                 <h1>Create Account</h1>
@@ -65,6 +119,7 @@
             </div>
         </div>
     </div>
+
 
     <script src="login.js"></script>
 </body>

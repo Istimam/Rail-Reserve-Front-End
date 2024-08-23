@@ -23,30 +23,31 @@ form.addEventListener('submit', (e) => {
 
     const fd = new FormData(e.target);
     const params = new URLSearchParams(fd);
-    fetch('http://localhost:3000/upload')
-    .then(response => response.text())
-    .then(data => console.log('Response:', data))
-    .catch(err => console.error('Error:', err));
+
+    // fetch('http://localhost:3000/upload')
+    // .then(response => response.text())
+    // .then(data => console.log('Response:', data))
+    // .catch(err => console.error('Error:', err));
 
 
-    // fetch('http://localhost:3000/upload', {
-    //     method: "POST",
-    //     body: params,
-    // })
-    // .then(res => {
-    //     if (!res.ok) {
-    //         throw new Error(`HTTP error! status: ${res.status}`);
-    //     }
-    //     return res.json();
-    // })
-    // .then(data => {
-    //     if (data.captchaSuccess) {
-    //         console.log("Form submitted successfully");
-    //     } else {
-    //         console.error("Form submission failed:", data.error);
-    //     }
-    // })
-    // .catch(err => {
-    //     console.error("Error during form submission:", err);
-    // });
+    fetch('http://localhost:3000/upload', {
+        method: "POST",
+        body: params,
+    })
+    .then(res => {
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+    })
+    .then(data => {
+        if (data.captchaSuccess) {
+            console.log("Form submitted successfully");
+        } else {
+            console.error("Form submission failed:", data.error);
+        }
+    })
+    .catch(err => {
+        console.error("Error during form submission:", err);
+    });
 });

@@ -1,0 +1,131 @@
+/* Navbar Styles */
+.navbar {
+    background-color: #2d3748; /* gray-800 */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+}
+
+.navbar-container {
+    margin: 0 auto;
+    max-width: 1280px;
+    padding: 0 16px; /* px-2 */
+}
+
+.navbar-content {
+    display: flex;
+    height: 64px; /* h-16 */
+    align-items: center;
+    justify-content: space-between;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 32px; /* h-8 */
+    width: auto;
+}
+
+.website-name {
+    color: #ffffff; /* text-white */
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    margin-left: 8px; /* ml-2 */
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nav-link {
+    padding: 8px 12px; /* px-3 py-2 */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    color: #e2e8f0; /* text-gray-300 */
+    border-radius: 4px; /* rounded-md */
+    text-decoration: none;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: #1a202c; /* bg-gray-900 */
+    color: #ffffff; /* text-white */
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    margin-left: 16px; /* ml-4 */
+}
+
+.notification-button {
+    background-color: #2d3748; /* bg-gray-800 */
+    border-radius: 50%;
+    padding: 8px; /* p-1 */
+    color: #a0aec0; /* text-gray-400 */
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.notification-button:hover {
+    color: #ffffff; /* text-white */
+}
+
+.notification-button:focus {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #2d3748; /* focus:ring */
+}
+
+.notification-icon {
+    height: 24px; /* h-6 */
+    width: 24px; /* w-6 */
+}
+
+.user-menu-button {
+    background-color: #2d3748; /* bg-gray-800 */
+    border-radius: 50%;
+    width: 32px; /* h-8 */
+    height: 32px; /* h-8 */
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.user-avatar {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+/* Mobile Menu Styles */
+.mobile-menu {
+    display: none;
+}
+
+.mobile-menu-links {
+    padding: 16px; /* px-2 pb-3 pt-2 */
+}
+
+.mobile-link {
+    display: block;
+    padding: 8px 12px; /* px-3 py-2 */
+    font-size: 1rem; /* text-base */
+    font-weight: 500; /* font-medium */
+    color: #e2e8f0; /* text-gray-300 */
+    border-radius: 4px; /* rounded-md */
+    text-decoration: none;
+}
+
+.mobile-link:hover,
+.mobile-link.active {
+    background-color: #1a202c; /* bg-gray-900 */
+    color: #ffffff; /* text-white */
+}
