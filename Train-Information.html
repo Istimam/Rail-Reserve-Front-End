@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Details | Rail Reserve</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./Train-Information.css">
+</head>
+<body class="pt-36">
+  <!-- navbar  -->
+  <nav class="bg-gray-800 fixed top-0 w-full z-50">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between w-[1200px] mx-auto">
+            <!-- Logo and Website Name -->
+            <div class="flex items-center">
+                <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+                <span class="text-white text-lg font-semibold ml-2">Your Website Name</span>
+            </div>
+
+            <!-- Navbar Links -->
+            <div class="flex-1 flex items-center justify-end">
+                <div class="hidden sm:ml-6 sm:block">
+                    <div class="flex space-x-4">
+                        <a href="./index.html" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</a>
+                        <a href="./login.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
+                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Register</a>
+                        <a href="./Train-Information.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Train Information</a>
+                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact Us</a>
+                    </div>
+                </div>
+
+                <!-- Profile dropdown and notification icon -->
+                <div class="ml-4 flex items-center">
+                    <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <span class="sr-only">View notifications</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                        </svg>
+                    </button>
+
+                    <div class="relative ml-3">
+                        <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                            <span class="sr-only">Open user menu</span>
+                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="sm:hidden" id="mobile-menu">
+        <div class="space-y-1 px-2 pb-3 pt-2">
+            <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Home</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Register</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Train Information</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact Us</a>
+        </div>
+    </div>
+  </nav>
+
+  <!-- body content  -->
+    <div class="w-[1200px] mx-auto gap-6 flex">
+        <!-- serach bar and train details card  -->
+         
+        <div class="search w-[400px] h-[200px] bg-blue-50 p-6 rounded shadow-md">
+            <h2 class="font-semibold mb-2">Select Your Preferred Train</h2>
+            <div class="search-box">
+                <input type="text" id="train-input" class="w-full p-4 rounded bg-lime-50" placeholder="SELECT TRAIN">
+                <ul id="train-dropdown-list" class="absolute z-10 left-0 w-full bg-white border border-gray-300 rounded mt-1 hidden max-h-60 overflow-y-auto">
+                    <!-- Train names will be dynamically loaded here -->
+                </ul>
+            </div>
+            <button id="searchButton" type="submit" class="w-full p-2 bg-green-700 text-white rounded mt-2">Search</button>
+        </div>
+        <div class="train-details w-[800px] rounded bg-green-50  shadow-md">
+            <div class="flex p-3 justify-between">
+                <div>
+                    <h1 class="text-orange-500 font-semibold">PURBACHAL EXPRESS(701)</h1>
+                </div>
+                <div class="flex gap-3">
+                    <h3 class="">Runs on:</h3>
+                    <ul class="flex gap-2">
+                        <li>Fri</li>
+                        <li>Sat</li>
+                        <li>Sun</li>
+                        <li>Mon</li>
+                        <li>Tue</li>
+                        <li>Wed</li>
+                        <li>Thu</li>
+                    </ul>
+                </div>
+            </div>  
+            <div class="border-t-2 border-gray-300">
+                <div class="mb-4">
+                    <h5 class="text-green-800 font-semibold p-3 underline underline-offset-8" style="text-decoration-thickness: 2px;">Routes</h5>
+                    <div class="pr-6">
+                        <div class="thread"></div>
+                        <div class="border-b-2 p-2">
+                            <h3 class="">Dhaka</h3>
+                            <div class="flex justify-between mb-3">
+                                <h3>Arrival: 12:00AM</h3>
+                                <h3>Halt: 05min</h3>
+                                <h3>Departure: 12:00AM</h3>
+                                <h3>Duration: 00:23h</h3>
+                            </div>
+                        </div>
+                        <div class="border-b-2 p-2">
+                            <h3 class="">Dhaka</h3>
+                            <div class="flex justify-between mb-3">
+                                <h3>Arrival: 12:00AM</h3>
+                                <h3>Halt: 05min</h3>
+                                <h3>Departure: 12:00AM</h3>
+                                <h3>Duration: 00:23h</h3>
+                            </div>
+                        </div>
+                        <div class="border-b-2 p-2">
+                            <h3 class="">Dhaka</h3>
+                            <div class="flex justify-between mb-3">
+                                <h3>Arrival: 12:00AM</h3>
+                                <h3>Halt: 05min</h3>
+                                <h3>Departure: 12:00AM</h3>
+                                <h3>Duration: 00:23h</h3>
+                            </div>
+                        </div>
+                        <div class="border-b-2 p-2">
+                            <h3 class="">Dhaka</h3>
+                            <div class="flex justify-between mb-3">
+                                <h3>Arrival: 12:00AM</h3>
+                                <h3>Halt: 05min</h3>
+                                <h3>Departure: 12:00AM</h3>
+                                <h3>Duration: 00:23h</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>          
+        </div>
+    </div>
+  <!-- footer  -->
+  <footer class="mt-20">
+    <div class="flex justify-center gap-3 border-t-2 border-b-2 border-gray-300 py-4 my-4">
+      <img class="" src="./images/bkash-logo.png" alt="">
+      <img src="./images/nagad-logo.png" alt="">
+      <img src="./images/rocket logo.png" alt="">
+      <img src="./images/visa logo.png" alt="">
+    </div>
+    <div class="w-[1200px] m-auto">
+      <p class="text-center">
+        The tickets are issued by Bangladesh Tailway Integrated Ticketing System (BRITS) and Shohoz-Synesis-Vincen JV is responsible for designing, development, implementation, technical operation & maintenance of the system.
+      </p>
+    </div>
+    <div class="flex border-t-4 border-green-700 py-8 bg-blue-50">
+      <div class="flex-1 ml-80">
+        <h3>Powered by</h3>
+        <img src="" alt="">
+      </div>
+      <div class="flex-1">
+        <h3 class="text-green-700">Terms and Conditions | Privacy Policy</h3>
+      </div>
+      <div class="flex mr-80">
+        <div class="flex-1">
+          <img src="" alt="">
+        </div>
+        <div>
+          <h3 class="text-emerald-500">Bangladesh Railway</h3>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+      <script src="./Train-information.js"></script>
+</body>
+</html>

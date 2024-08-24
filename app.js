@@ -16,33 +16,47 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Class selection
-    const input = document.getElementById('class-input');
+    const classInput = document.getElementById('class-input');
     const dropdownList = document.getElementById('dropdown-list');
     const icon = document.getElementById('dropdown-icon');
+    
+    // Fetch and populate coach classes
+    fetch('https://rail-reserve-back-end.onrender.com/coach-class/')
+        .then(response => response.json())
+        .then(data => {
+            dropdownList.innerHTML = '';
+            data.forEach(coachClass => {
+                const li = document.createElement('li');
+                li.textContent = coachClass.name;
+                li.className = 'p-2 cursor-pointer hover:bg-green-100';
+                dropdownList.appendChild(li);
 
-    input.addEventListener('focus', () => {
-        dropdownList.classList.remove('hidden');
-        icon.classList.add('rotate-180'); // Rotate the icon when focused
-    });
-
-    input.addEventListener('blur', () => {
-        // Delay the hiding to allow click events on the dropdown items
-        setTimeout(() => {
-            dropdownList.classList.add('hidden');
-            icon.classList.remove('rotate-180'); // Reset the icon when focus is lost
-        }, 100);
-    });
-
-    // Handle click events on dropdown items
-    dropdownList.querySelectorAll('li').forEach(item => {
-        item.addEventListener('click', (e) => {
-            input.value = e.target.textContent; // Set the input value to the clicked item
-            dropdownList.classList.add('hidden'); // Hide the dropdown after selection
-            icon.classList.remove('rotate-180');
-            checkInputs(); // Check inputs when a class is selected
+                li.addEventListener('click', function() {
+                    classInput.value = coachClass.name; // Set input box value
+                    dropdownList.classList.add('hidden'); // Hide dropdown after selection
+                    icon.classList.remove('rotate-180'); // Reset icon rotation
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching coach classes:', error);
         });
+
+    // Toggle dropdown visibility and icon rotation
+    classInput.addEventListener('click', function() {
+        dropdownList.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180'); // Rotate icon on click
     });
 
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!classInput.contains(event.target) && !dropdownList.contains(event.target)) {
+            dropdownList.classList.add('hidden'); // Hide dropdown
+            icon.classList.remove('rotate-180'); // Reset icon rotation
+        }
+    });
+
+    // checking all the boxes are populated 
     function checkInputs() {
         const fromInput = document.getElementById('input-box-from').value.trim();
         const toInput = document.getElementById('input-box-to').value.trim();

@@ -1,10 +1,7 @@
 let availableKeywords = [];
 
 // Fetch station data from the API
-fetch('https://rail-reserve-back-end.onrender.com/stations/',{
-    method: 'GET',
-    mode: 'no-cors',
-})
+fetch('https://rail-reserve-back-end.onrender.com/stations/')
     .then(response => {
         console.log('Response Status:', response.status); // Log status code
         if (!response.ok) {

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Station Thread</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            position: relative;
+        }
+
+        .thread {
+            width: 2px;
+            background-color: #007BFF;
+            position: absolute;
+            left: 18px;
+            top: 20px;
+            bottom: 20px;
+            z-index: 1;
+        }
+
+        .station {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .station:last-child {
+            margin-bottom: 0;
+        }
+
+        .station-box {
+            width: 20px;
+            height: 20px;
+            background-color: #007BFF;
+            border-radius: 6px;
+            margin-right: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .station-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .start-stop {
+            width: 30px;
+            height: 30px;
+            background-color: #28A745;
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stop {
+            background-color: #DC3545;
+        }
+
+        .station-container {
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="thread"></div>
+    
+    <div class="station">
+        <div class="start-stop"></div>
+        <div class="station-text">Start: Dhaka</div>
+    </div>
+
+    <div class="station">
+        <div class="station-box"></div>
+        <div class="station-text">Biman Bandar</div>
+    </div>
+
+    <div class="station">
+        <div class="station-box"></div>
+        <div class="station-text">Natore</div>
+    </div>
+
+    <div class="station">
+        <div class="station-box"></div>
+        <div class="station-text">Santahar</div>
+    </div>
+
+    <div class="station">
+        <div class="station-box"></div>
+        <div class="station-text">Joypurhat</div>
+    </div>
+
+    <div class="station">
+        <div class="station-box"></div>
+        <div class="station-text">Parbatipur</div>
+    </div>
+
+    <div class="station">
+        <div class="station-box"></div>
+        <div class="station-text">Dinajpur</div>
+    </div>
+
+    <div class="station">
+        <div class="station-box"></div>
+        <div class="station-text">Pirganj</div>
+    </div>
+
+    <div class="station">
+        <div class="station-box"></div>
+        <div class="station-text">Thakurgaon Road</div>
+    </div>
+
+    <div class="station">
+        <div class="station-box"></div>
+        <div class="station-text">B Sirajul Islam</div>
+    </div>
+
+    <div class="station">
+        <div class="start-stop stop"></div>
+        <div class="station-text">Stop: Panchagarh</div>
+    </div>
+</div>
+
+</body>
+</html>
