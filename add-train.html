@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    <link rel="stylesheet" href="index-style.css">
+    <link rel="stylesheet" href="add-train.css">
     <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body>
@@ -33,6 +33,7 @@
                         <a href="./index.html" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</a>
                         <a href="./login.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
                         <a href="./registrationForm.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Register</a>
+                        <a href="./add-train.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Add Train</a>
                         <a href="./Train-Information.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Train Information</a>
                         <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact Us</a>
                     </div>
@@ -85,118 +86,68 @@
   </nav>
 
   <!-- body content  -->
-  <div class="w-[1200px] mx-auto">
-    <!-- Search & Banner  -->
-    <div class="flex gap-x-4 my-40">
-      <!-- search box  -->
-      <div class="flex-1 mt-14">
-        <div class="grid gap-4 grid-cols-2">
-          <div>
-            <h4>From</h4>
-            <div class="autocomplete-wrapper">
-              <input type="text" id="input-box-from" class="w-full p-1 border-2 border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-50" placeholder="From Station">
-              <div class="result-box-from result-box">
-                <ul class="bt-[1px] pl-2 bg-zinc-200 shadow-md"></ul>
-              </div>
-            </div>
-          </div>        
-          <div>
-            <h4>To</h4>
-            <div class="autocomplete-wrapper">
-              <input type="text" id="input-box-to" class="w-full p-1 border-2 border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-50" placeholder="To Station">
-              <div class="result-box-to result-box">
-                <ul class="bt-[1px] pl-2 bg-zinc-200 shadow-md"></ul>
-              </div>
-            </div>
-          </div>
-          <div class="relative">
-            <h4>Date of Journey</h4>
-            <input type="text" id="datePicker" class="w-full p-1 border-2 border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-50 pr-10" placeholder="Pick a Date">
-            <div class="absolute inset-y-0 right-0 flex items-center pr-2 mt-5">
-              <img src="./images/calendar.png" alt="Calendar Icon" class="calendar-icon">
-            </div>
-          </div>
-          <div class="relative inline-block w-full">
-            <h4>Choose Class</h4>
-            <input type="text" id="class-input" class="w-full p-1 border-2 border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:bg-blue-50 pr-8" placeholder="Choose a class">
-            <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-              <svg id="dropdown-icon" class="w-5 h-5 text-gray-500 transition-transform duration-300 mt-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </span>
-            <ul id="dropdown-list" class="absolute z-10 left-0 w-full bg-white border border-gray-300 rounded mt-1 hidden">
-            </ul>
-          </div>
+  <div class="add-train mt-20 w-[1200px] mx-auto">
+    <div class="bg-green-200 shadow-lg rounded-lg">
+      <div class="bg-green-700 p-6">
+        <h1 class="text-3xl font-bold text-white">Add Train</h1>
+      </div>
+      <form id="train-form" action="" class="p-8 space-y-6">
+        <div class="flex items-center gap-4">
+          <label for="train-name" class="w-1/4 text-lg font-medium text-gray-700">Train Name:</label>
+          <input type="text" id="train-name" name="train-name" required 
+                 class="w-3/4 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
         </div>
-        <div class="mt-7">
-          <button id="searchButton" type="submit" class="w-full p-2 bg-gray-300 text-white rounded" disabled>Search Trains</button>
+        <label for="add-staions" class="w-1/4 text-lg font-medium text-gray-700">Train Route:</label>
+        <div id="stations-container" class="mt-4">
+       <!-- Dynamically added stations -->
         </div>
-      </div>
-      <!-- banner  -->
-      <div class="flex-1">
-        <div class="swiffy-slider slider-item-ratio slider-item-ratio-16x9 slider-nav-animation slider-nav-animation-fadein" id="swiffy-animation">
-          <ul class="slider-container rounded" id="container1">
-              <li id="slide1" class=""><img src="./images/banner-image.jpg" alt="..." loading="lazy"></li>
-              <li id="slide2" class=""><img src="./images/banner-p-2.png" alt="..." loading="lazy"></li>
-              <li id="slide3" class="slide-visible"><img src="../assets/img/photos/img3.webp" alt="..." loading="lazy"></li>
-              <li id="slide4" class=""><img src="../assets/img/photos/img1.webp" alt="..." loading="lazy"></li>
-              <li id="slide5" class=""><img src="../assets/img/photos/img2.webp" alt="..." loading="lazy"></li>
-              <li id="slide6" class=""><img src="../assets/img/photos/img3.webp" alt="..." loading="lazy"></li>
-          </ul>
-      
-          <button type="button" class="slider-nav" aria-label="Go to previous"></button>
-          <button type="button" class="slider-nav slider-nav-next" aria-label="Go to next"></button>
-      
-          <div class="slider-indicators">
-              <button aria-label="Go to slide" class=""></button>
-              <button aria-label="Go to slide" class=""></button>
-              <button aria-label="Go to slide" class="active"></button>
-              <button aria-label="Go to slide" class=""></button>
-              <button aria-label="Go to slide" class=""></button>
-              <button aria-label="Go to slide" class=""></button>
+        <button type="button" id="add-station-button">+ Add Station</button>
+      <!-- Multiple Selected Dropdown For Coach Class -->
+      <div>
+          
+      <div class="relative inline-block w-64 w-full max-w-sm mt-5">
+          <label for="coach-dropdown" class="block text-lg font-medium text-gray-700">Select Coach:</label>
+          <button id="dropdownButton" class="w-full bg-green-700 border border-gray-300 rounded-md shadow-sm px-4 py-2 text-left text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" onclick="toggleDropdown(event)">
+              Select Classes
+          </button>
+          <div id="dropdownMenu" class="absolute left-0 z-10 hidden w-full bg-white border rounded-md shadow-lg max-h-40 overflow-y-auto">
+              <ul id="dropdownOptions" class="p-2">
+                  <!-- Options will be dynamically populated here -->
+              </ul>
           </div>
       </div>
       </div>
-    </div>
-    <!-- Services  -->
-    <div class="flex mt-20">
-      <div class="flex-1">
-        <img src="./images/search-pic.png" alt="">
-        <h1 class="font-semibold mt-4 text-2xl">Search</h1>
-        <p class="mt-2">
-          Choose your origin, destination, journey dates and search for trains
-        </p>
+      <!-- Multiple Selected Dropdown For Days -->
+      <div id="week-container" class="w-full max-w-sm mt-5">
+        <label for="week-dropdown" class="block text-lg font-medium text-gray-700">Select Days:</label>
+        <div class="relative mt-2">
+            <button id="week-dropdown-btn" type="button" class="w-full bg-green-700 border border-green-300 rounded-md shadow-sm px-4 py-2 text-left text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" aria-haspopup="true">
+                Select Week
+            </button>
+            
+            <div id="week-dropdown-menu" class="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto hidden">
+              <button id="select-all-btn" class="bg-gray-500 text-white w-full py-2 text-center">Select All</button>
+                <ul id="week-list" class="py-1 text-sm text-gray-700">
+                    <!-- Options will be dynamically inserted here -->
+                </ul>
+            </div>
+        </div>
+    
+        <div id="week-days" class="mt-4">
+            <!-- Selected week days will be displayed here -->
+        </div>
       </div>
-      <div class="flex-1 mt-7">
-        <img src="./images/select-pic.png" alt="">
-        <h1 class="font-semibold mt-4 text-2xl">Select</h1>
-        <p class="mt-2">
-          Select your desired trip and choose your seats
-        </p>
+      
+    <!-- submit button  -->
+      <div class="">
+        <button id="trainSubmitBtn" type="submit" class="px-6 py-3 bg-green-700 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">Submit</button>
       </div>
-      <div class="flex-1 mt-8">
-        <img src="./images/pay-pic.png" alt="">
-        <h1 class="font-semibold mt-4 text-2xl">Pay</h1>
-        <p class="mt-2">
-          Pay for the tickets via Debit / Credit Cards or MFS
-        </p>
-      </div>
-    </div>
-    <!-- Instructions  -->
-    <div class="flex mt-20">
-      <div class="flex-1">
-        <img src="./images/instuction.png" alt="">
-      </div>
-      <div class="flex-1">
-        <h1 class="font-bold text-2xl mb-4">Instructions to Purchase Tickets</h1>
-        <li>Tickets can be bought online ten days in advance.</li>
-        <li>Tickets can be purchased in advance online or by phone.</li>
-        <li>In case of payment or transaction failure, the deducted amount would be refunded by your bank or MFS provider within 8 business days.</li>
-        <li>In case money has been deducted from your card / mobile wallet but you have not received a ticket confirmation, the deducted amount would be refunded by your bank or MFS provider within 8 business days.</li>
-        <li>In case of passengers downloading fake apps or any other app from Google Play which claim to sell train tickets of Bangladesh Railway, the authorities will not take any liability.</li>
-      </div>
+      </form>
     </div>
   </div>
+  
+    
+
   <!-- footer  -->
   <footer class="mt-20">
     <div class="flex justify-center gap-3 border-t-2 border-b-2 border-gray-300 py-4 my-4">
@@ -229,10 +180,8 @@
     </div>
   </footer>
 
-      <script src="./app.js"></script>
-      <script src="./autocomplete.js"></script>
-      <!-- <script src="./registraionForm.js"></script> -->
-      <script src="./profile-dropdown-menu.js"></script>
+  <script src="./add-train.js"></script>
+  <script src="./profile-dropdown-menu.js"></script>
 
 </body>
 </html>

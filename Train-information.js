@@ -1,41 +1,71 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const trainInput = document.getElementById('train-input');
-    const dropdownList = document.getElementById('train-dropdown-list');
+document.addEventListener("DOMContentLoaded", function () {
+    const trainInput = document.getElementById("train-input");
+    const dropdownList = document.getElementById("train-dropdown-list");
 
-    // Fetch Train Data
-    fetch('https://rail-reserve-back-end.onrender.com/trains/')
+    // Fetch train data from the API
+    fetch("https://rail-reserve-back-end.onrender.com/trains/")
         .then(response => response.json())
         .then(data => {
-            console.log('API Response:', data); // Confirm the data format
-
-            const trains = data;
-
-            if (Array.isArray(trains)) {
-                trains.forEach(train => {
-                    const listItem = document.createElement('li');
-                    listItem.classList.add('p-2', 'cursor-pointer', 'hover:bg-blue-50');
-                    listItem.textContent = train.name;
-                    listItem.addEventListener('click', function() {
-                        trainInput.value = train.name;
-                        dropdownList.classList.add('hidden'); // Hide dropdown on selection
-                    });
-                    dropdownList.appendChild(listItem);
-                });
-            } else {
-                console.error('Expected an array of trains but got:', trains);
-            }
+            populateDropdown(data);
         })
-        .catch(error => console.error('Error fetching train data:', error));
+        .catch(error => {
+            console.error("Error fetching train data:", error);
+        });
 
-    // Toggle Dropdown on Input Click
-    trainInput.addEventListener('click', function() {
-        dropdownList.classList.toggle('hidden');
+    function populateDropdown(trains) {
+        dropdownList.innerHTML = ''; // Clear existing options
+
+        trains.forEach(train => {
+            const listItem = document.createElement("li");
+            listItem.textContent = train.name;
+            listItem.classList.add("p-2", "cursor-pointer", "hover:bg-gray-100");
+
+            // Handle selecting an option
+            listItem.addEventListener("click", function () {
+                trainInput.value = train.name;
+                dropdownList.style.display = "none";
+            });
+
+            dropdownList.appendChild(listItem);
+        });
+    }
+
+    // Filter function
+    trainInput.addEventListener("input", function () {
+        const filter = trainInput.value.toLowerCase();
+        let hasVisibleItems = false;
+
+        dropdownList.querySelectorAll("li").forEach(function (option) {
+            const text = option.textContent.toLowerCase();
+            if (text.includes(filter)) {
+                option.style.display = "block";
+                hasVisibleItems = true;
+            } else {
+                option.style.display = "none";
+            }
+        });
+
+        dropdownList.style.display = hasVisibleItems ? "block" : "none";
     });
 
-    // Hide Dropdown on Outside Click
-    document.addEventListener('click', function(event) {
-        if (!trainInput.contains(event.target) && !dropdownList.contains(event.target)) {
-            dropdownList.classList.add('hidden');
+    // Show dropdown when input is clicked or focused
+    trainInput.addEventListener("focus", function () {
+        dropdownList.style.display = "block";
+    });
+
+    // Re-populate the dropdown when the input is clicked
+    trainInput.addEventListener("click", function () {
+        // Re-populate the dropdown to show all items if the input is clicked
+        dropdownList.querySelectorAll("li").forEach(function (option) {
+            option.style.display = "block";
+        });
+        dropdownList.style.display = "block";
+    });
+
+    // Hide dropdown if clicked outside
+    document.addEventListener("click", function (e) {
+        if (!e.target.closest(".search-box")) {
+            dropdownList.style.display = "none";
         }
     });
 });

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Rail Reserve</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- swiffy-animation  -->
+    <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous" defer></script>
+    <!-- flatpickr  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <link rel="stylesheet" href="index-style.css">
+    <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body class="bg-gray-100">
+  <!-- navbar  -->
+  <nav class="bg-gray-800 fixed top-0 w-full z-50">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between w-full">
+            <!-- Logo and Website Name -->
+            <div class="flex items-center">
+                <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+                <span class="text-white text-lg font-semibold ml-2">Your Website Name</span>
+            </div>
+
+            <!-- Navbar Links -->
+            <div class="flex-1 flex items-center justify-end">
+                <div class="hidden sm:ml-6 sm:block">
+                    <div class="flex space-x-4">
+                        <a href="./index.html" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</a>
+                        <a href="./login.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
+                        <a href="./login.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Register</a>
+                        <a href="./Train-Information.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Train Information</a>
+                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact Us</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+  
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="sm:hidden" id="mobile-menu">
+        <div class="space-y-1 px-2 pb-3 pt-2">
+            <a href="./index.html" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Home</a>
+            <a href="./login.html" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
+            <a href="./login.html" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Register</a>
+            <a href="./Train-Information.html" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Train Information</a>
+            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact Us</a>
+        </div>
+    </div>
+  </nav>
+
+  <!-- body content  -->
+    <main class="pt-40 pb-12 flex justify-center items-center">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full" style="max-width: 800px; margin: 0 auto;">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Registration</h2>
+            <form action="#" id="registerForm" method="POST">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <input type="text" id="full-name" name="full_name" placeholder="Full Name" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
+                    <input type="email" id="email" name="email" placeholder="E-mail" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <input type="tel" id="mobile" name="mobile_number" placeholder="Mobile Number" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200" maxlength="11" pattern="\d*" title="Please enter only numbers" required>
+
+                    <input type="text" id="nid" name="nid_number" placeholder="NID Number" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <input type="text" id="postcode" name="postcode" placeholder="Post Code" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
+                    <input type="date" id="dob" name="dob" placeholder="Date of Birth" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
+                </div>
+                <div class="mb-4">
+                    <textarea id="address" name="address" placeholder="Address" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200"></textarea>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <input type="password" id="password" name="password" placeholder="Enter New Password" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
+                    <input type="password" id="confirm-password" name="confirm_password" placeholder="Enter Confirm Password" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
+                </div>
+                <div class="flex justify-between items-center mb-6">
+                    <button id="signUpBtn" type="submit" class="w-full bg-green-600 text-white font-semibold py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-200" disabled>SIGN UP</button>
+                </div>
+                <div class="text-center">
+                    <p class="text-gray-700">Already Registered? <a href="./login.html" class="text-green-600 hover:underline">Login</a></p>
+                </div>
+            </form>
+        </div>
+        
+    </main>
+    
+      <!-- footer -->
+      <footer class="mt-20">
+        <!-- <div class="flex justify-center gap-3 border-t-2 border-b-2 border-gray-300 py-4 my-4">
+          <img class="" src="./images/bkash-logo.png" alt="">
+          <img src="./images/nagad-logo.png" alt="">
+          <img src="./images/rocket logo.png" alt="">
+          <img src="./images/visa logo.png" alt="">
+        </div>
+        <div class="w-[1200px] m-auto">
+          <p class="text-center">
+            The tickets are issued by Bangladesh Tailway Integrated Ticketing System (BRITS) and Shohoz-Synesis-Vincen JV is responsible for designing, development, implementation, technical operation & maintenance of the system.
+          </p>
+        </div> -->
+        <div class="flex border-t-4 border-green-700 py-8 bg-blue-50">
+          <div class="flex-1 ml-80">
+            <h3>Powered by</h3>
+            <img src="" alt="">
+          </div>
+          <div class="flex-1">
+            <h3 class="text-green-700">Terms and Conditions | Privacy Policy</h3>
+          </div>
+          <div class="flex mr-80">
+            <div class="flex-1">
+              <img src="" alt="">
+            </div>
+            <div>
+              <h3 class="text-emerald-500">Bangladesh Railway</h3>
+            </div>
+          </div>
+        </div>
+      </footer>
+    
+    <script src="./registraionForm.js"></script>      
+    </body>
+</html>
+    

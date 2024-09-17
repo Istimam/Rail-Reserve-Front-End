@@ -1,0 +1,28 @@
+/* styles.css */
+#stations-container {
+    margin-top: 20px;
+}
+.station-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.station-group input {
+    margin-right: 10px;
+    padding: 5px;
+}
+.station-group .remove-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+#add-station-button {
+    margin-top: 10px;
+    padding: 10px;
+    background: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

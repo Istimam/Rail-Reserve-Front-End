@@ -3,138 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Train Station Thread</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            padding: 20px;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            position: relative;
-        }
-
-        .thread {
-            width: 2px;
-            background-color: #007BFF;
-            position: absolute;
-            left: 18px;
-            top: 20px;
-            bottom: 20px;
-            z-index: 1;
-        }
-
-        .station {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .station:last-child {
-            margin-bottom: 0;
-        }
-
-        .station-box {
-            width: 20px;
-            height: 20px;
-            background-color: #007BFF;
-            border-radius: 6px;
-            margin-right: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .station-text {
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .start-stop {
-            width: 30px;
-            height: 30px;
-            background-color: #28A745;
-            border-radius: 50%;
-            margin-right: 10px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .stop {
-            background-color: #DC3545;
-        }
-
-        .station-container {
-            margin-left: 30px;
-        }
-    </style>
+    <title>Add Train</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="test.css">
 </head>
 <body>
+    <form id="train-form">
+        <label for="train-name">Train Name:</label>
+        <input type="text" id="train-name" name="train-name" required>
+        
+        <div id="stations-container">
+            <!-- Statzion input fields will be appended here -->
+        </div>
+        
+        <button type="button" id="add-station-button">+ Add Station</button>
+        <button type="submit">Submit</button>
 
-<div class="container">
-    <div class="thread"></div>
-    
-    <div class="station">
-        <div class="start-stop"></div>
-        <div class="station-text">Start: Dhaka</div>
-    </div>
+        <!-- <div id="coach-container" class="w-full max-w-sm mx-auto mt-5">
+            <label for="coach-dropdown" class="block text-sm font-medium text-gray-700">Select Coaches:</label>
+            <div class="relative mt-2">
+              <button id="dropdown-btn" type="button" class="w-full bg-green-700 border border-green-300 rounded-md shadow-sm px-4 py-2 text-left text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" aria-haspopup="true">
+                Select Coach Classes
+              </button>
+          
+              <div id="dropdown-menu" class="absolute mt-1 w-full bg-white border border-white-300 rounded-md shadow-lg max-h-60 overflow-auto hidden">
+                <div class="px-4 py-2 bg-gray-100">
+                <label class="inline-flex items-center">
+                    <input type="checkbox" id="select-all" class="form-checkbox h-4 w-4 text-indigo-600">
+                    <span class="ml-2">Select All</span>
+                </label>
+                </div>
+                <ul id="coach-list" class="py-1 text-sm text-gray-700">
+                  Options will be dynamically inserted here
+                </ul>
+              </div>
+            </div>
+          </div> -->
 
-    <div class="station">
-        <div class="station-box"></div>
-        <div class="station-text">Biman Bandar</div>
-    </div>
+          <div id="coach-container" class="w-full max-w-sm mt-5">
+            <label for="coach-dropdown" class="block text-lg font-medium text-gray-700">Select Coaches:</label>
+            <div class="relative mt-2">
+                <button id="dropdown-btn" type="button" class="w-full bg-green-700 border border-gray-300 rounded-md shadow-sm px-4 py-2 text-left text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" aria-haspopup="true">
+                    Select Coach Classes
+                </button>
+        
+                <div id="dropdown-menu" class="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto hidden">
+                    <div class="px-4 py-2 bg-gray-100">
+                        <label class="inline-flex items-center w-full cursor-pointer">
+                            <input type="checkbox" id="select-all" class="form-checkbox h-4 w-4 text-indigo-600">
+                            <span class="ml-2">Select All</span>
+                        </label>
+                    </div>
+                    <ul id="coach-list" class="py-1 text-sm text-gray-700">
+                        <!-- Options will be dynamically inserted here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+          
+          
+    </form>
 
-    <div class="station">
-        <div class="station-box"></div>
-        <div class="station-text">Natore</div>
-    </div>
-
-    <div class="station">
-        <div class="station-box"></div>
-        <div class="station-text">Santahar</div>
-    </div>
-
-    <div class="station">
-        <div class="station-box"></div>
-        <div class="station-text">Joypurhat</div>
-    </div>
-
-    <div class="station">
-        <div class="station-box"></div>
-        <div class="station-text">Parbatipur</div>
-    </div>
-
-    <div class="station">
-        <div class="station-box"></div>
-        <div class="station-text">Dinajpur</div>
-    </div>
-
-    <div class="station">
-        <div class="station-box"></div>
-        <div class="station-text">Pirganj</div>
-    </div>
-
-    <div class="station">
-        <div class="station-box"></div>
-        <div class="station-text">Thakurgaon Road</div>
-    </div>
-
-    <div class="station">
-        <div class="station-box"></div>
-        <div class="station-text">B Sirajul Islam</div>
-    </div>
-
-    <div class="station">
-        <div class="start-stop stop"></div>
-        <div class="station-text">Stop: Panchagarh</div>
-    </div>
-</div>
-
+    <script src="test.js"></script>
 </body>
 </html>

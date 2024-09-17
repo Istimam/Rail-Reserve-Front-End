@@ -1,0 +1,66 @@
+.station-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative; /* Ensures suggestions are positioned correctly relative to this group */
+}
+
+.station-group input {
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 200px; /* Adjust the width to your desired size */
+    box-sizing: border-box; /* Ensure padding doesn't affect the input width */
+}
+
+.station-group .remove-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#add-station-button {
+    margin-top: 10px;
+    padding: 10px;
+    background: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.suggestions {
+    /* border: 1px solid #ccc; */
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #fff;
+    position: absolute;
+    top: 35px; /* Adjust so it sits right below the input field */
+    width: 200px; /* Same width as input field, accounting for padding */
+    z-index: 10;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds shadow for better visibility */
+}
+
+.suggestion-item {
+    border: 1px solid green;
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+}
+
+.suggestion-item:hover {
+    background-color: green;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none; /* Removes the border from the last item */
+}
+
+
+
+  
+  
