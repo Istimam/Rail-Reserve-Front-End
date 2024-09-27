@@ -21,18 +21,18 @@ document.addEventListener("DOMContentLoaded", function() {
     const icon = document.getElementById('dropdown-icon');
     
     // Fetch and populate coach classes
-    fetch('https://rail-reserve-back-end.onrender.com/coach-class/')
+    fetch('http://127.0.0.1:8000/coach-classes/')
         .then(response => response.json())
         .then(data => {
             dropdownList.innerHTML = '';
             data.forEach(coachClass => {
                 const li = document.createElement('li');
-                li.textContent = coachClass.name;
+                li.textContent = coachClass.coach_name;
                 li.className = 'p-2 cursor-pointer hover:bg-green-100';
                 dropdownList.appendChild(li);
 
                 li.addEventListener('click', function() {
-                    classInput.value = coachClass.name; // Set input box value
+                    classInput.value = coachClass.coach_name; // Set input box value
                     dropdownList.classList.add('hidden'); // Hide dropdown after selection
                     icon.classList.remove('rotate-180'); // Reset icon rotation
                 });

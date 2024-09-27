@@ -77,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('dobError').textContent = '';
 
         // Check if the mobile number or NID number already exists
-        // Check if the mobile number or NID number already exists
         fetch(`https://rail-reserve-back-end.onrender.com/users/?mobile=${encodeURIComponent(mobileNumber)}&nid=${encodeURIComponent(nidNumber)}`)
         .then(response => response.json())
         .then(existenceData => {
@@ -89,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (!mobileExists && !nidExists) {
                 // Proceed with NID validation if both are unique
-                fetch(`https://rail-reserve-back-end.onrender.com/NID/list/`)
+                fetch(`http://127.0.0.1:8000/NID/list/`)
                 .then(response => response.json())
                 .then(nidData => {
                     console.log("NID validation response:", nidData);
@@ -135,47 +134,111 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
-
-
-
 // Login form submission
-document.getElementById('loginForm').addEventListener('submit', async function(event){
+// document.getElementById('loginForm').addEventListener('submit', async function(event){
+//     event.preventDefault();
+//     const phone_no = document.getElementById('phoneNumber').value;
+//     const password = document.getElementById('password').value;
+//     console.log('Phone number: ' + phone_no + ' Password: ' + password);
+//     try {
+//         const response = await fetch('http://127.0.0.1:8000/login/',{
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//                 phone_no: phone_no, 
+//                 password: password
+//             })
+//         });
+
+//         const data = await response.json();
+        
+//         if (response.ok) {
+//             const token = data.token;
+//             const userId = data.user_id;
+
+//             // Store the token and userId securely
+            
+//             alert('Login successful!');
+            
+//             // Redirect to another page, e.g., the homepage
+//             window.location.href = '/Rail_Reserve%20Front-End/index.html';
+            
+//         } else {
+//             alert('Login failed: ' + (data.detail || 'Unknown error'));
+//             console.log(data);
+//         }
+//     } catch (error) {
+//         console.error('Error during login:', error);
+//     }
+// });
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
+
+    // Get values from form inputs
     const phone_no = document.getElementById('phoneNumber').value;
     const password = document.getElementById('password').value;
 
+    console.log('Phone number: ' + phone_no + ' Password: ' + password);
+
     try {
-        const response = await fetch('https://rail-reserve-back-end.onrender.com/login/',{
+        // Send login request to server
+        const response = await fetch('http://127.0.0.1:8000/login/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                phone_no: phone_no, 
+                phone_no: phone_no,
                 password: password
             })
         });
 
         const data = await response.json();
-        
-        if (response.ok) {
-            const token = data.token;
-            const userId = data.user_id;
 
-            // Store the token and userId securely
-            
+        if (response.ok) {
+            // Store the token and user ID in localStorage
+            localStorage.setItem('authToken', data.token);
+            localStorage.setItem('userId', data.user_id);
+
             alert('Login successful!');
-            
-            // Redirect to another page, e.g., the homepage
+
+            // Redirect to the homepage or another page after successful login
             window.location.href = '/Rail_Reserve%20Front-End/index.html';
-            
         } else {
+            // If login fails, show the error message returned by the backend
             alert('Login failed: ' + (data.detail || 'Unknown error'));
             console.log(data);
         }
     } catch (error) {
+        // Handle any errors that occur during the request
         console.error('Error during login:', error);
+        alert('An error occurred. Please try again.');
     }
 });
 
+// For authourization 
+// const token = localStorage.getItem('authToken');
+
+// fetch('http://127.0.0.1:8000/protected-resource/', {
+//     method: 'GET',
+//     headers: {
+//         'Authorization': `Token ${token}`,  // Include the token in the Authorization header
+//         'Content-Type': 'application/json'
+//     }
+// }).then(response => response.json())
+//   .then(data => {
+    //       console.log(data);
+    //   })
+    //   .catch(error => {
+        //       console.error('Error fetching protected resource:', error);
+        //   });
+
+// For Logout
+        // function logout() {
+//     localStorage.removeItem('authToken');
+//     localStorage.removeItem('userId');
+//     alert('Logged out successfully!');
+//     window.location.href = '/login.html';  // Redirect to the login page
+// }

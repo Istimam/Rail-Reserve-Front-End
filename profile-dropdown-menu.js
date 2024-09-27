@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Get the elements
-    const userMenuButton = document.getElementById('user-menu-button');
+    console.log('DOM fully loaded');
+    const userMenuButton = document.getElementById('user_menu_btn');
+    console.log('User menu button:', userMenuButton);
+    
     if (!userMenuButton) {
-        console.error("Element with ID 'user-menu-button' not found.");
+        console.error("Element with ID 'user_menu_btn' not found.");
         return;
     }
 

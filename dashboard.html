@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div id="navbar" class="mb-20"></div>
+    
+    <!-- Sidebar Menu -->
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="w-64 h-screen bg-gray-800 text-white">
+            <div class="p-6 text-xl font-bold">Dashboard</div>
+            <ul class="space-y-4 p-6">
+                <li><a href="./users_list.html" class="hover:text-gray-300">Users</a></li>
+                <li><a href="#" class="hover:text-gray-300">Total Trains</a></li>
+                <li><a href="#" class="hover:text-gray-300">Total Tickets</a></li>
+                <li><a href="#" class="hover:text-gray-300">Total Comments</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <!-- Stats Cards -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-bold">Total Users</h3>
+                    <p class="text-3xl">1,200</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-bold">Total Trains</h3>
+                    <p class="text-3xl">75</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-bold">Total Tickets</h3>
+                    <p class="text-3xl">3,400</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-bold">Total Comments</h3>
+                    <p class="text-3xl">150</p>
+                </div>
+            </div>
+
+            <!-- Buttons for Week/Month Toggle -->
+            <div class="flex gap-4 mb-6">
+                <button id="weekBtn" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Week</button>
+                <button id="monthBtn" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Month</button>
+            </div>
+
+            <!-- Graph for Tickets Sold -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-lg font-bold mb-4">Tickets Sold - Last 30 Days</h3>
+                <canvas id="ticketsChart"></canvas>
+            </div>
+        </main>
+    </div>
+
+    <!-- Chart.js Script to Display Graph -->
+    <script>
+        const ctx = document.getElementById('ticketsChart').getContext('2d');
+
+        const weekData = {
+            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            datasets: [{
+                label: 'Total Tickets',
+                data: [15, 12, 14, 18, 9, 16, 10],
+                backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40', '#ffcd56'],
+                borderWidth: 1
+            }]
+        };
+
+        const monthData = {
+            labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10', 
+                     'Day 11', 'Day 12', 'Day 13', 'Day 14', 'Day 15', 'Day 16', 'Day 17', 'Day 18', 'Day 19', 'Day 20', 
+                     'Day 21', 'Day 22', 'Day 23', 'Day 24', 'Day 25', 'Day 26', 'Day 27', 'Day 28', 'Day 29', 'Day 30'],
+            datasets: [{
+                label: 'Total Tickets',
+                data: [15, 12, 14, 18, 9, 16, 10, 23, 17, 14, 19, 12, 25, 22, 10, 16, 20, 21, 11, 19, 
+                       18, 12, 15, 14, 20, 13, 17, 21, 23, 19],
+                backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40', '#ffcd56', 
+                                  '#4bc0c0', '#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40', 
+                                  '#ffcd56', '#4bc0c0', '#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', 
+                                  '#ff9f40', '#ffcd56', '#4bc0c0', '#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', 
+                                  '#9966ff', '#ff9f40'],
+                borderWidth: 1
+            }]
+        };
+
+        let currentChart = new Chart(ctx, {
+            type: 'bar',
+            data: monthData,
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Days'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Tickets Sold'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Toggle between Week and Month data
+        document.getElementById('weekBtn').addEventListener('click', () => {
+            currentChart.destroy();
+            currentChart = new Chart(ctx, {
+                type: 'bar',
+                data: weekData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Days of the Week'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Tickets Sold'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        document.getElementById('monthBtn').addEventListener('click', () => {
+            currentChart.destroy();
+            currentChart = new Chart(ctx, {
+                type: 'bar',
+                data: monthData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Days of the Month'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Tickets Sold'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+  <script src="./nav.js"></script>
+</body>
+</html>

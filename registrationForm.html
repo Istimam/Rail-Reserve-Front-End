@@ -26,23 +26,23 @@
             <form action="#" id="registerForm" method="POST">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <input type="text" id="full-name" name="full_name" placeholder="Full Name" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
-                    <input type="email" id="email" name="email" placeholder="E-mail" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
+                    <input type="email" id="email" name="email" placeholder="Email" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <input type="tel" id="mobile" name="mobile_number" placeholder="Mobile Number" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200" maxlength="11" pattern="\d*" title="Please enter only numbers" required>
+                    <input type="tel" id="mobile" name="phone_no" placeholder="Mobile Number" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200" maxlength="11" pattern="\d*" title="Please enter only numbers" required>
 
                     <input type="text" id="nid" name="nid_number" placeholder="NID Number" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <input type="text" id="postcode" name="postcode" placeholder="Post Code" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
-                    <input type="date" id="dob" name="dob" placeholder="Date of Birth" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
+                    <input type="text" id="postcode" name="postal_code" placeholder="Post Code" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
+                    <input type="date" id="dob" name="date_of_birth" placeholder="Date of Birth" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
                 </div>
                 <div class="mb-4">
                     <textarea id="address" name="address" placeholder="Address" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200"></textarea>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <input type="password" id="password" name="password" placeholder="Enter New Password" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
-                    <input type="password" id="confirm-password" name="confirm_password" placeholder="Enter Confirm Password" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
+                    <input type="password" id="confirm_password" name="password2" placeholder="Enter Confirm Password" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200">
                 </div>
                 <div class="flex justify-between items-center mb-6">
                     <button id="signUpBtn" type="submit" class="w-full bg-green-600 text-white font-semibold py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-200" disabled>SIGN UP</button>
@@ -81,6 +81,7 @@
       .then(response => response.text())
       .then(data => document.getElementById("navbar").innerHTML = data);
     </script>
+    <script src="./toast.js"></script>
     <script src="./registraionForm.js"></script>      
     </body>
 </html>

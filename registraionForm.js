@@ -1,14 +1,3 @@
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     // Mobile menu toggle
-//     const menuButton = document.querySelector('#menu-button');
-//     const mobileMenu = document.querySelector('#mobile-menu');
-//     menuButton.addEventListener('click', () => {
-//       mobileMenu.classList.toggle('hidden');
-//     });
-//   });
-// alert("Hello! I am an alert box!");
-
 document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
     const nidNo = params.get('nid');
@@ -23,12 +12,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const dobField = document.getElementById('dob');
     const addressField = document.getElementById('address');
     const passwordField = document.getElementById('password');
-    const confirmPasswordField = document.getElementById('confirm-password');
-
+    const confirmPasswordField = document.getElementById('confirm_password');
     // Function to fetch NID data based on NID number
     async function fetchNIDData(nidNumber) {
         try {
-            const response = await fetch('https://rail-reserve-back-end.onrender.com/NID/list/');
+            const response = await fetch('http://127.0.0.1:8000/NID/list/');
             const data = await response.json();
             return data.results.find(nid => nid.id_number === nidNumber);
         } catch (error) {
@@ -62,16 +50,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     function validateForm() {
         const fullName = fullNameField.value.trim();
         const email = emailField.value.trim();
-        const mobileNumber = mobileField.value.trim();
+        const phone_no = mobileField.value.trim();
         const nidNumber = nidField.value.trim();
-        const postalCode = postalCodeField.value.trim();
-        const dob = dobField.value.trim();
+        const postcode = postalCodeField.value.trim();
+        const date_of_birth = dobField.value.trim();
         const address = addressField.value.trim();
         const password = passwordField.value.trim();
-        const confirmPassword = confirmPasswordField.value.trim();
-
+        const password2 = confirmPasswordField.value.trim();
+    
         // Check if all fields are filled and if passwords match
-        const allFieldsFilled = fullName && email && mobileNumber && nidNumber && postalCode && dob && address && password && confirmPassword && password === confirmPassword;
+        const allFieldsFilled = fullName && email && phone_no && nidNumber && postcode && date_of_birth && address && password && password2 && password === password2;
 
         // Enable/disable button based on validation
         signUpBtn.disabled = !allFieldsFilled;
@@ -95,22 +83,57 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // creating an account 
+// document.addEventListener("DOMContentLoaded", function() {
+//     const form = document.getElementById("registerForm");
+//     const signUpBtn = document.getElementById("signUpBtn");
+
+//     form.addEventListener('submit', function(e) {
+//         e.preventDefault();
+
+//         const formData = new FormData(form);
+
+//         // Convert formData to a plain object for easier manipulation if necessary
+//         const formObject = {};
+//         formData.forEach((value, key) => {
+//             formObject[key] = value;
+//         })
+//         console.log('Payload Data:', formObject);
+//         fetch('http://127.0.0.1:8000/register/',{
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(formObject)
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log("Registration successful:", data);
+//         })
+//         .catch(err => {
+//             console.error("Error registering:", err);
+//             // Display error message to user
+//         });
+//     });
+// });
+
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("registerForm");
-    const signUpBtn = document.getElementById("signUpBtn");
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
         const formData = new FormData(form);
 
-        // Convert formData to a plain object for easier manipulation if necessary
+        // Convert formData to a plain object
         const formObject = {};
         formData.forEach((value, key) => {
             formObject[key] = value;
-        })
+        });
 
-        fetch('https://rail-reserve-back-end.onrender.com/register/',{
+        console.log('Payload Data:', formObject);
+
+        // Send the form data to the backend
+        fetch('http://127.0.0.1:8000/register/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -119,11 +142,17 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log("Registration successful:", data);
+            // Show success toast
+            showToast("Check your mail for the Confirmation Link");
+
+            // Redirect to login after a delay
+            setTimeout(() => {
+                window.location.href = '/Rail_Reserve%20Front-End/login.html'; // Update this URL to your login page
+            }, 3000); // Redirect after 3 seconds
         })
         .catch(err => {
             console.error("Error registering:", err);
-            // Display error message to user
+            showToast("Error occurred during registration. Please try again.", 'error');
         });
     });
 });
