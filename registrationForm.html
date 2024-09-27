@@ -17,42 +17,7 @@
 </head>
 <body class="bg-gray-100">
   <!-- navbar  -->
-  <nav class="bg-gray-800 fixed top-0 w-full z-50">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div class="relative flex h-16 items-center justify-between w-full">
-            <!-- Logo and Website Name -->
-            <div class="flex items-center">
-                <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-                <span class="text-white text-lg font-semibold ml-2">Your Website Name</span>
-            </div>
-
-            <!-- Navbar Links -->
-            <div class="flex-1 flex items-center justify-end">
-                <div class="hidden sm:ml-6 sm:block">
-                    <div class="flex space-x-4">
-                        <a href="./index.html" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</a>
-                        <a href="./login.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
-                        <a href="./login.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Register</a>
-                        <a href="./Train-Information.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Train Information</a>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact Us</a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-  
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="sm:hidden" id="mobile-menu">
-        <div class="space-y-1 px-2 pb-3 pt-2">
-            <a href="./index.html" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Home</a>
-            <a href="./login.html" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</a>
-            <a href="./login.html" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Register</a>
-            <a href="./Train-Information.html" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Train Information</a>
-            <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact Us</a>
-        </div>
-    </div>
-  </nav>
+  <div id="navbar"></div>
 
   <!-- body content  -->
     <main class="pt-40 pb-12 flex justify-center items-center">
@@ -92,17 +57,6 @@
     
       <!-- footer -->
       <footer class="mt-20">
-        <!-- <div class="flex justify-center gap-3 border-t-2 border-b-2 border-gray-300 py-4 my-4">
-          <img class="" src="./images/bkash-logo.png" alt="">
-          <img src="./images/nagad-logo.png" alt="">
-          <img src="./images/rocket logo.png" alt="">
-          <img src="./images/visa logo.png" alt="">
-        </div>
-        <div class="w-[1200px] m-auto">
-          <p class="text-center">
-            The tickets are issued by Bangladesh Tailway Integrated Ticketing System (BRITS) and Shohoz-Synesis-Vincen JV is responsible for designing, development, implementation, technical operation & maintenance of the system.
-          </p>
-        </div> -->
         <div class="flex border-t-4 border-green-700 py-8 bg-blue-50">
           <div class="flex-1 ml-80">
             <h3>Powered by</h3>
@@ -122,6 +76,11 @@
         </div>
       </footer>
     
+    <script>
+      document.getElementById("navbar").innerHTML = fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
     <script src="./registraionForm.js"></script>      
     </body>
 </html>

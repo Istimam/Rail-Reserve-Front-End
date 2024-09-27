@@ -116,14 +116,35 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // collecting station data 
+// function collectStationData() {
+//     const stationGroups = document.querySelectorAll('.station-group');
+//     const stationData = [];
+//     stationGroups.forEach((stationGroup, index) => {
+//         const stationName = stationGroup.querySelector(`input[name="station-name-${index + 1}"]`).value.trim();
+//         const arrivalTime = stationGroup.querySelector(`input[name="arrival-time-${index + 1}"]`).value;
+//         const departureTime = stationGroup.querySelector(`input[name="departure-time-${index + 1}"]`).value;
+
+//         if (stationName && arrivalTime && departureTime) {
+//             stationData.push({
+//                 station_name: stationName,
+//                 arrival_time: arrivalTime,
+//                 departure_time: departureTime
+//             });
+//         }
+//     });
+//     return stationData;
+// }
 function collectStationData() {
     const stationGroups = document.querySelectorAll('.station-group');
     const stationData = [];
-    stationGroups.forEach((stationGroup, index) => {
-        const stationName = stationGroup.querySelector(`input[name="station-name-${index + 1}"]`).value.trim();
-        const arrivalTime = stationGroup.querySelector(`input[name="arrival-time-${index + 1}"]`).value;
-        const departureTime = stationGroup.querySelector(`input[name="departure-time-${index + 1}"]`).value;
 
+    stationGroups.forEach(stationGroup => {
+        // Directly access the inputs from the station group container
+        const stationName = stationGroup.querySelector('input[name^="station-name"]').value.trim();
+        const arrivalTime = stationGroup.querySelector('input[name^="arrival-time"]').value;
+        const departureTime = stationGroup.querySelector('input[name^="departure-time"]').value;
+
+        // Ensure all fields are filled
         if (stationName && arrivalTime && departureTime) {
             stationData.push({
                 station_name: stationName,
@@ -132,10 +153,11 @@ function collectStationData() {
             });
         }
     });
+    // console.log('Station Data:', stationData);
     return stationData;
 }
 
-const apiUrl = 'http://127.0.0.1:8000/coach-class/'; // API URL
+const apiUrl = 'http://127.0.0.1:8000/coach-classes/'; // API URL
 let selectedClasses = []; // Array to store selected values
 let dropdownOpen = false; // Track dropdown state
 
@@ -160,8 +182,8 @@ async function fetchClasses() {
             const li = document.createElement('li');
             li.innerHTML = `
                 <label class="inline-flex items-center">
-                    <input type="checkbox" class="form-checkbox" value="${item.name}" onchange="handleSelectChange(this)">
-                    <span class="ml-2">${item.name}</span>
+                    <input type="checkbox" class="form-checkbox" value="${item.coach_name}" onchange="handleSelectChange(this)">
+                    <span class="ml-2">${item.coach_name}</span>
                 </label>
             `;
             dropdownOptions.appendChild(li);
@@ -232,36 +254,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const weekDaysContainer = document.getElementById('week-days');
     const selectAllBtn = document.getElementById('select-all-btn');
 
-    // Fetch weeks data and populate the dropdown
+    // Fetch days from the "runs-on" API and populate the dropdown
     function fetchWeeks() {
-        fetch('http://127.0.0.1:8000/weeks/')
+        fetch('http://127.0.0.1:8000/runs-on/')  // Use the updated API URL
             .then(response => response.json())
             .then(data => {
                 console.log(data);
                 populateWeekDropdown(data);
             })
             .catch(error => {
-                console.error('Error fetching weeks:', error);
+                console.error('Error fetching runs-on data:', error);
             });
     }
 
     // Populate the dropdown with week options (as checkboxes)
     function populateWeekDropdown(weeks) {
         weekList.innerHTML = ''; // Clear previous options
-        weeks.forEach(week => {
+        weeks.forEach((week, index) => {
             const li = document.createElement('li');
             li.classList.add('flex', 'items-center', 'px-4', 'py-2', 'hover:bg-green-100', 'cursor-pointer');
             
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.classList.add('mr-2');
-            checkbox.value = week.days; // Store the day directly
-            checkbox.id = `week-${week.id}`;
-            checkbox.name = `week-${week.id}`;
+            checkbox.value = week.day_name; // Store the day_name directly
+            checkbox.id = `week-${index}`;
+            checkbox.name = `week-${index}`;
     
             const label = document.createElement('label');
-            label.setAttribute('for', `week-${week.id}`);
-            label.textContent = week.days; // Display the day name
+            label.setAttribute('for', `week-${index}`);
+            label.textContent = week.day_name; // Display the day_name
     
             li.appendChild(checkbox);
             li.appendChild(label);
@@ -298,20 +320,20 @@ document.addEventListener('DOMContentLoaded', () => {
         event.stopPropagation();
     });
 
-    // Fetch weeks when the page loads
+    // Fetch the "runs-on" data when the page loads
     fetchWeeks();
 });
 
 
-// Implementation of erro handling 
 
+// Implementation of erro handling & Create a new Train object
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
     const stationsContainer = document.getElementById('stations-container');
     const dropdownOptions = document.getElementById('dropdownOptions');
     const weekList = document.getElementById('week-list');
     const errorContainer = document.createElement('div');
-    
+
     errorContainer.className = 'error-messages text-red-500 mt-4';
     form.appendChild(errorContainer);
 
@@ -346,65 +368,73 @@ document.addEventListener('DOMContentLoaded', () => {
                 errorItem.textContent = error;
                 errorContainer.appendChild(errorItem);
             });
-            isValid = false;
+            isValid = false; // Set valid to false if there are errors
         }
 
-        return isValid;
+        return isValid; // Return the validity status
     }
 
-    form.addEventListener('submit', (event) => {
+    // Handle form submission
+    document.getElementById('train-form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Step 1: Validate the form
         if (!validateForm()) {
-            event.preventDefault(); // Prevent form submission if validation fails
+            return; // Exit if validation fails
         }
-    });
 
-    // Fetch and populate dropdown on page load
-    fetchClasses();
+        // Step 2: Collect form data if validation passes
+        const trainName = document.getElementById('train-name').value;
+        const stations = collectStationData();  // Function to collect station data
+        const selectedClasses = collectSelectedClasses();  // Function to collect coach class data
+        const weekList = document.getElementById('week-list');
+        const selectedDays = getSelectedDays(weekList);
+
+        // Prepare the train data
+        const trainData = {
+            name: trainName,
+            coach_classes: selectedClasses.map(cls => ({ coach_name: cls })),
+            runs_on: selectedDays.map(day => ({ day_name: day })),
+            train_stations: stations.map(station => ({
+                station_name: station.station_name,
+                arrival_time: station.arrival_time,
+                departure_time: station.departure_time
+            }))
+        };
+        console.log('Train Data Payload:', trainData);
+
+        // Step 3: Make POST request to the `/trains/` endpoint
+        fetch('http://127.0.0.1:8000/trains/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(trainData)
+        })
+        .then(response => {
+            // Check if the response is ok
+            if (!response.ok) {
+                return response.json().then(error => {
+                    throw new Error(error.detail || 'Failed to create train'); // Use error.detail or a default message
+                });
+            }
+            return response.json(); // Return JSON data if response is OK
+        })
+        .then(data => {
+            // Handle successful response
+            console.log('Train created successfully:', data);
+            alert('Train created successfully!');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Show the error message in the error container
+            errorContainer.innerHTML = ''; // Clear previous error messages
+            const errorItem = document.createElement('div');
+            errorItem.textContent = error.message; // Display the specific error from backend
+            errorContainer.appendChild(errorItem);
+        });
+    });
 });
 
-document.getElementById('train-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Collect the form data
-    const trainName = document.getElementById('train-name').value;
-    const stations = collectStationData(); // Call the function to get station data
-    const selectedClasses = collectSelectedClasses(); // Call the function to get selected coach class data
-    const weekList = document.getElementById('week-list');
-    const selectedDays = getSelectedDays(weekList); // Call the function to get selected days
-
-    // Prepare the data object
-    const trainData = {
-        name: trainName,
-        stations: stations, // Ensure this matches the API structure
-        runs_on: selectedDays,
-        classes: selectedClasses
-    };
-
-    // Send the data to the API using the fetch method
-    fetch('http://127.0.0.1:8000/trains/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json', // The API expects JSON format
-        },
-        body: JSON.stringify(trainData), // Convert the data to JSON
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Handle success, such as displaying a confirmation message
-        console.log('Success:', data);
-        alert('Train details have been successfully submitted!');
-    })
-    .catch(error => {
-        // Handle error, such as displaying an error message
-        console.error('Error:', error);
-        alert('There was an error submitting the train details.');
-    });
-    console.log({
-        trainName,
-        stations,
-        selectedClasses,
-        selectedDays
-    });
-});
 
 
